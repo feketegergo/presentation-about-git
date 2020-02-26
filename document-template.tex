@@ -1,0 +1,118 @@
+%% LaTeX Beamer presentation template (requires beamer package)
+%% see http://bitbucket.org/rivanvx/beamer/wiki/Home
+%% idea contributed by H. Turgut Uyar
+%% template based on a template by Till Tantau
+%% this template is still evolving - it might differ in future releases!
+
+\documentclass{beamer}
+
+\mode<presentation>
+{
+\usetheme{Warsaw}
+
+\setbeamercovered{transparent}
+}
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+
+% font definitions, try \usepackage{ae} instead of the following
+% three lines if you don't like this look
+\usepackage{mathptmx}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+
+
+\usepackage[T1]{fontenc}
+
+
+\title{Colony Size Detection  -  Overexpression}
+
+%\subtitle{}
+
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+%\author{F.~Author\inst{1} \and S.~Another\inst{2}}
+\author{Gergely Fekete}
+
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+%\institute[Universities of]
+%{
+%\inst{1}%
+%Department of Computer Science\\
+%Univ of S
+%\and
+%\inst{2}%
+%Department of Theoretical Philosophy\\
+%Univ of E}
+
+\date{2014.08.12 -  Lab Meeting}
+
+
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+\subject{Overexpression - Threated Strains}
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+
+%\beamerdefaultoverlayspecification{<+->}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{gitter}
+\subsection{The Experiment}
+
+
+
+\begin{frame}
+\frametitle<presentation>{The Experiment}
+\includegraphics[height=60pt]{figures/orf-in-plasmid.jpg}
+\begin{itemize}
+   \item  We have sequencing data
+   \item 1 in data on $t_0$ time
+   \item 4 in data on $t_1$ time: 3 threatments and a non threated
+   \item We calculate 4 fitnes values (statisticaly dependent)
+   
+   
+   \item no background levels measured
+   \item no replicates
+   
+   \item \ldots but p-values are needed
+   
+ \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle<presentation>{Treshold}
+\begin{itemize}
+  
+  
+  
+   \item $t_0$ < tershold  AND all of $t_1$< treshold $\Rightarrow$ drop row
+ \end{itemize}
+\end{frame}
+
+
+
+
+\end{document}
