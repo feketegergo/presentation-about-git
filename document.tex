@@ -25,6 +25,10 @@
 
 \usepackage[T1]{fontenc}
 
+%\usepackage[pass,showframe]{geometry}% just to show the page margins
+%\usepackage[demo]{graphicx}% remove demo option in actual document
+
+
 
 \title{GIT and GitHub}
 
@@ -47,12 +51,12 @@
 %Department of Theoretical Philosophy\\
 %Univ of E}
 
-\date{2020.02.26 -  Lab Meeting}
+\date{2022.06.01 -  Lab Seminar}
 
 
 % This is only inserted into the PDF information catalog. Can be left
 % out.
-\subject{GIT and GitHub}
+\subject{GIT  the  Global Information Trackr}
 
 
 
@@ -81,6 +85,197 @@
 
 
 
+\begin{frame}
+	\frametitle<presentation>{Features - What git can do?}
+	
+	\begin{itemize}
+	\item security copies
+	\item syncronisation between machines
+	\item work together
+	\item version tracking
+	\end{itemize}
+
+\end{frame}
+
+%%-----------
+ 
+\begin{frame}
+\includegraphics[height=160pt]{pictures/Screenshot_2020-02-25_17-47-03-ugly_folder-zoom_in.png}
+\includegraphics[height=160pt]{pictures/Simson.png}
+\end{frame}
+
+
+%%-----------
+
+\section{Let's desing a version tracker}
+\begin{frame}
+\includegraphics[height=160pt]{pictures/idea.jpg}
+\end{frame}
+
+ 
+\section{Let's desing a version tracker}
+\begin{frame}
+\frametitle<presentation>{Let's desing a version tracker}
+suppose that \dots
+  we have a project folder and we want to desing a version tracking workflow
+
+\includegraphics[height=160pt]{pictures/project_folder.png}
+\end{frame}
+
+\begin{frame}
+\frametitle<presentation>{The Snapshots}
+\includegraphics[height=160pt]{pictures/project_folder_with_dated_zips.png}
+\end{frame}
+
+\begin{frame}
+\frametitle<presentation>{The Stage}
+\includegraphics[height=160pt]{pictures/project_folder_stageing.png}
+
+  create an empty stage -> copy what you need to the stage -> zip the stage -> delete the stage
+\end{frame}
+
+\begin{frame}
+\frametitle<presentation>{The Stage}
+\includegraphics[height=160pt]{pictures/project_folder_stageing.png}
+
+ create an empty stage ->extract there the prevois zip -> overwrite some files from the actual project folder-> zip the stage -> delete the stage
+\end{frame}
+
+
+\begin{frame}
+\frametitle<presentation>{The Hash}
+\includegraphics[height=160pt]{pictures/project_folder_with_hash_named_zips.png}
+
+Trivial namig methosd causes name conflicts.
+
+Hash is a unique hexadecimal number.
+\end{frame}
+
+
+\begin{frame}
+\frametitle<presentation>{The Log and the Commit Message and The Commit}
+\begin{table}
+\tiny
+\begin{tabular}{|p{2cm}|p{3cm}|p{3cm}|p{4cm}| }
+ \hline
+ hash & author & date & message\\ 
+ \hline
+ 4649520675e14bea&Fekete Gergo <fekger@gmail.com>&Tue Feb 25 18:55:34 2020 +0100& 20190717 no operetta info\\
+ 280dbd863f1d5274&Fekete Gergo <fekger@gmail.com>&Tue Feb 25 18:53:18 2020 +0100& new plates added + fix\\
+ 01fc0c3f0eb2583d&Fekete Gergo <fekger@gmail.com>&Tue Feb 25 18:49:16 2020 +0100& fix in WP-bakers-plate1\\
+ 5f3541ba26ced7d5&Fekete Gergo <fekger@gmail.com>&Tue Feb 25 17:57:12 2020 +0100& mol new columns clade,clinical isolate,control\\
+ 07d502c30a444b68&Fekete Gergo <fekger@gmail.com>&Tue Feb 25 17:53:10 2020 +0100& introduce merged operetta layyout file\\
+ f190947bc82aa557&Fekete Gergo <fekger@gmail.com>&Tue Feb 25 15:15:24 2020 +0100& fix formating again\\
+ 54a51ca076f664c1&Fekete Gergo <fekger@gmail.com>&Tue Feb 25 15:11:11 2020 +0100& fix formating error\\
+ b8bfb3b9388b910e&Fekete Gergo <gergo@desktop1>&Tue Feb 25 15:03:48 2020 +0100& first files\\
+ \end{tabular}
+
+\end{table}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle<presentation>{The Log and the Commit Message and The Commit}
+
+  A \textbf{commit} means creating a snapeshot and note it to the log table
+  
+\end{frame}
+
+
+\begin{frame}
+\frametitle<presentation>{Summarise}
+  
+\noindent\begin{minipage}{0.6\textwidth}% adapt widths of minipages to your needs
+\includegraphics[width=\linewidth]{pictures/resting-under-tree.jpg}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.4\textwidth}\raggedleft
+\begin{itemize}
+    \item stage
+    \item snapshot
+	\item commit
+	\item hash
+	\item  log
+	\end{itemize}
+	\pause
+	\begin{itemize}
+    \item  \texttt{ git status}
+    \item  \texttt{ git add}
+    \item  \texttt{ git commit} 
+    \item  \texttt{ git log}
+	\end{itemize}
+	
+\end{minipage}
+  
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle<presentation>{Resource Requirements}
+  
+\noindent\begin{minipage}{0.6\textwidth}% adapt widths of minipages to your needs
+\includegraphics[width=\linewidth]{pictures/resting-under-tree+big_pack.png}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.4\textwidth}\raggedleft
+
+\begin{block}{Does the lot of snapshots need a lot of space?}
+No
+\end{block}
+
+
+\begin{block}{Is it fast?}
+Yes 
+\end{block}
+
+Actually the zip files do not exist as a simple file. They are stored in a tricky form.
+	
+\end{minipage}
+  
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle<presentation>{The harder part}
+  
+\noindent\begin{minipage}{0.6\textwidth}% adapt widths of minipages to your needs
+\includegraphics[width=\linewidth]{pictures/resting-under-tree+nessie.png}
+\end{minipage}%
+\hfill%
+\begin{minipage}{0.4\textwidth}\raggedleft
+\begin{itemize}
+    \item how to roll back ?
+    \item how to managge the simultaneous work of more users ?
+	\item branching
+	\item how to upload on a server?
+	\item how to download ?
+	\item which snapshot is the actual?
+	\end{itemize}
+\end{minipage}
+  
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle<presentation>{The harder part}
+  
+  \begin{block}{This is the tricky question:}
+  	which snapshot is the actual?
+  \end{block}
+
+  
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 
