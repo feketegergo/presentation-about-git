@@ -30,7 +30,7 @@
 
 
 
-\title{GIT and GitHub}
+\title{GIT - Globar Information Tracker}
 
 %\subtitle{}
 
@@ -136,7 +136,7 @@ suppose that \dots
 
 \begin{frame}
 \frametitle<presentation>{The Stage}
-\includegraphics[height=160pt]{pictures/project_folder_stageing.png}
+\includegraphics[height=160pt]{pictures/project_folder_stageing-2.png}
 
  create an empty stage ->extract there the prevois zip -> overwrite some files from the actual project folder-> zip the stage -> delete the stage
 \end{frame}
@@ -178,7 +178,7 @@ Hash is a unique hexadecimal number.
 \begin{frame}
 \frametitle<presentation>{The Log and the Commit Message and The Commit}
 
-  A \textbf{commit} means creating a snapeshot and note it to the log table
+  A \textbf{commit} means creating a (1) snapeshot and (2)note it to the log table and (3) a reference to the parent(s)
   
 \end{frame}
 
@@ -197,6 +197,7 @@ Hash is a unique hexadecimal number.
 	\item commit
 	\item hash
 	\item  log
+	\item \textbf{repository}
 	\end{itemize}
 	\pause
 	\begin{itemize}
@@ -230,8 +231,6 @@ No
 Yes 
 \end{block}
 
-Actually the zip files do not exist as a simple file. They are stored in a tricky form.
-	
 \end{minipage}
   
 \end{frame}
@@ -243,7 +242,7 @@ Actually the zip files do not exist as a simple file. They are stored in a trick
 
 
 \begin{frame}
-\frametitle<presentation>{The harder part}
+\frametitle<presentation>{The scary part}
   
 \noindent\begin{minipage}{0.6\textwidth}% adapt widths of minipages to your needs
 \includegraphics[width=\linewidth]{pictures/resting-under-tree+nessie.png}
@@ -251,12 +250,12 @@ Actually the zip files do not exist as a simple file. They are stored in a trick
 \hfill%
 \begin{minipage}{0.4\textwidth}\raggedleft
 \begin{itemize}
-    \item how to roll back ?
-    \item how to managge the simultaneous work of more users ?
-	\item branching
 	\item how to upload on a server?
 	\item how to download ?
-	\item which snapshot is the actual?
+    \item how to roll back ?
+    \item how to manage the simultaneous work of more users ?
+	\item branching?
+	\item which is the current snapshot?
 	\end{itemize}
 \end{minipage}
   
@@ -265,13 +264,196 @@ Actually the zip files do not exist as a simple file. They are stored in a trick
 
 
 \begin{frame}
-\frametitle<presentation>{The harder part}
+\frametitle<presentation>{The not so scary part}
   
-  \begin{block}{This is the tricky question:}
-  	which snapshot is the actual?
+  \begin{block}{how to roll back to an older version?}
+	\begin{itemize}
+		\item \texttt{git checkout}   extract the zip you want
+		%\item it will overwtite you actual files!
+	\end{itemize}
+  \end{block}
+  
+  \begin{block}{how to upload on a server?}
+	\begin{itemize}
+		\item \texttt{git push} simple upload all zip-s
+		\item some of the zip-s has a copy on the server yet. The hash based name helps.
+		\item commit first, then push
+	\end{itemize}
+  \end{block}
+
+  \begin{block}{how to download ftom a server?}
+	\begin{itemize}
+		\item simple download zip-s you don't have yet
+		\item \texttt{git fetch} only download zips
+		\item \texttt{git pull}  download zips, and extract the \textbf{current}
+	\end{itemize}
   \end{block}
 
   
+  
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}
+	\noindent\begin{minipage}{0.5\textwidth}
+	\includegraphics[width=\linewidth]{pictures/to-be-or-not-to-be-that-is-the-question.jpg}
+	\end{minipage}%
+	\hfill%
+	\begin{minipage}{0.45\textwidth}\raggedleft
+	  \begin{block}{That is the  question:}
+	  	which is the current snapshot?
+	  \end{block}
+	
+	\end{minipage}
+\end{frame}
+  
+  
+
+\begin{frame}
+
+	\noindent\begin{minipage}{0.5\textwidth}
+	\includegraphics[width=\linewidth]{pictures/git-head-1.png}
+	\end{minipage}%
+	\hfill%
+	\begin{minipage}{0.45\textwidth}\raggedleft
+	  \begin{block}{That is the  question:}
+	  	which is the current snapshot?
+	  \end{block}
+	  \begin{itemize}
+		  \item Different snapshot is current for you and for the co-workers.
+		 % \item Different snapshots are present on different machines
+		  \item the HEAD poibnts to the current \textit{branch} and it points to the current  snapshot 
+		  \item how is it managged ?
+  	  \end{itemize}
+	
+	\end{minipage}
+	
+	  \begin{itemize}
+		  \item red: commit objects : snapshots + ...
+		  \item yellow: Brancses = pointers to commit objects
+		  \item green: the HEAD = pointer to pointer
+  	  \end{itemize}
+	
+	
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle<presentation>{Situation 1 : The simplest case}
+
+
+	\noindent\begin{minipage}{0.4\textwidth}% adapt widths of minipages to your needs
+	\includegraphics[width=\linewidth]{pictures/git-mater-head-simplest.png}
+	
+	 \begin{itemize}
+		  \item red: commit objects 
+		  \item yellow: Brancses 
+		  \item green: the HEAD
+  	  \end{itemize}
+	
+	\end{minipage}%
+	\hfill%
+	\begin{minipage}{0.55\textwidth}\raggedleft
+	  \begin{itemize}
+		  \item If you work alone on only one machine with no rollbacks , no branches
+		  \item master branch allways points to the current commit
+		  \item master  steps automaticly by commit
+		  \item HEAD always points to the master
+  	  \end{itemize}
+	
+	\end{minipage}
+	
+	 
+	
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle<presentation>{Situation 2 : Rollback}
+
+\begin{block}{}
+	\includegraphics[width=140pt]{pictures/git-mater-head-simplest.png}
+	\end{block}
+	
+	\begin{block}{Someting is wrong, we step back}
+	\includegraphics[width=140pt]{pictures/git-mater-head-rollback.png}
+	\end{block}
+	
+	\begin{block}{The next commit  creates a bifurcation; The bed commit turns to a dead end}
+	\includegraphics[width=140pt]{pictures/git-mater-head-rollback-and-branch.png}
+	\end{block}
+	
+	 
+	
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle<presentation>{Situation 3 : Working together}
+
+\begin{block}{Gabor want to join to my work. We create a virtual copy of all files: a branch}
+	\includegraphics[width=120pt]{pictures/git-mater-working-simultanously-1.png}
+	\end{block}
+	
+	\begin{block}{We both are working on two separate machines, separate working copies }
+	\includegraphics[width=120pt]{pictures/git-mater-working-simultanously-2.png}
+	\hfill
+	\includegraphics[width=140pt]{pictures/git-mater-working-simultanously-3.png}
+	\end{block}
+	
+	\begin{block}{We syncronise : \texttt{push, push, fetch, fetch}}
+	\includegraphics[width=150pt]{pictures/git-mater-working-simultanously-4.png}
+	There is only one head per machine!
+	\end{block}
+	
+	 
+	
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}
+	\frametitle<presentation>{Brances and the HEAD pointer}
+
+	\noindent\begin{minipage}{0.5\textwidth}
+	
+	\includegraphics[height=60pt]{pictures/git-head-1.png}
+	
+	Effect of \texttt{git commit}
+
+	\includegraphics[height=60pt]{pictures/git-head+after-commit.png}
+
+	\end{minipage}%
+	\hfill%
+	\begin{minipage}{0.45\textwidth}\raggedleft
+		\begin{block}{}
+		\begin{itemize}
+		  \item default branch name is master (can be renamed)
+		  \item brances are moveing pointers
+		  \item current branch steps automaticly by commit
+		  \item HEAD points to the current branch
+		  \item the new commit object will know which one is its parent
+		\end{itemize}
+		\end{block}
+	\end{minipage}
+	
+	
 \end{frame}
 
 
